@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>
+      welcome to destination page
+
+    </h1>
+
+    <h1>
+      {{trips.destination}}
+
+    </h1>
+    <p>
+      planned by:{{trips.user.name}}
+    </p>
+    <p>
+      description :{{trips.description}}
+    </p>
+    <p>
+      travel date from:{{trips.traveldate_from}}
+    </p>
+    <p>
+      travel date to :{{trips.traveldate_to}}
+    </p>
+
+    <h1>other users joined the trip</h1>
+    <p>
+      {% for joiner in trips.join.all %}
+      {{joiner.name}}
+      {% endfor %}
+    </p>
+
+    <a href="{% url 'belt:goback' %}">Goback</a>
+    <a href="{% url 'belt:logout' %}">LogOut</a>
+  </body>
+</html>

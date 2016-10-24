@@ -5,6 +5,33 @@
     <title></title>
   </head>
   <body>
-    welcome to belt index
+    <p>
+      welcome
+    </p>
+    <h3>Register</h3>
+    <form  action="{% url 'belt:register' %}" method="post">
+      {% csrf_token %}
+      name<input type="text" name="name">
+      username <input type="text" name="username" >
+      Password <input type="Password" name="Password" >
+      Confirm Password: <input type="Password" name="cpassword">
+      <input type="submit"  value="Register">
+    </form>
+
+    <p>
+      {{errors}}
+    </p>
+    <p>
+      {{user.user.fname}}{{msg}}
+    </p>
+    <h3>Login</h3>
+    <form class="" action="{% url 'belt:login' %}" method="post">
+      {% csrf_token %}
+      username:<input type="text" name="username" >
+      Password: <input type="password" name="Password" >
+      <input type="submit" value="Login">
+    </form>
+
+
   </body>
 </html>

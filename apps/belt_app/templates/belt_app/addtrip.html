@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>
+
+      add a trip
+
+    </h1>
+    <form class="" action="{% url 'belt:addtrip' %}" method="post">
+      {% csrf_token %}
+      destination <input type="text" name="destination" >
+      description: <textarea name="description" rows="8" cols="40"></textarea>
+      datetravel_from:<input type="date" name="datetravel_from">
+      datetravel_to:<input type="date" name="datetravel_to" >
+      <input type="submit" value="add a trip">
+    </form>
+    {% if messages %}
+   <ul class="messages">
+     {% for message in messages %}
+     <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+     {% endfor %}
+   </ul>
+   {% endif %}
+
+    <a href="{% url 'belt:goback' %}">Goback</a>
+    <a href="{% url 'belt:logout' %}">LogOut</a>
+  </body>
+</html>

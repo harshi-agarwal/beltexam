@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <h1>Welcome login {{request.session.name}} {{request.session.userid}}</h1>
+
+    <table>
+      *********
+      {% for trip in trips %}
+      {% if trip.user.id == request.session.userid or user in trip.join.all %}
+      <tr>
+      <td>
+      <a href="{% url 'belt:destination' id=trip.id %}">{{trip.destination}}</a>
+     </td>
+    <td>
+      {{trip.description}}
+    </td>
+    <td>
+      {{trip.traveldate_from}}
+
+    </td>
+    <td>
+      {{trip.traveldate_to}}
+    </td>
+    <td>
+      {{trip.user.name}}
+    </td>
+
+  </tr>
+
+  {% endif %}
+  {% endfor %}
+</table>
+<h1>Other travel plans</h1>
+<table>
+    ********
+    {% for trip in trips %}
+    {% if not trip.user.id == request.session.userid and user not in trip.join.all %}
+
+    <tr>
+    <td>
+
+    <a href="{% url 'belt:destination' id=trip.id %}">{{trip.destination}}</a>
+  </td>
+  <td>
+    {{trip.description}}
+  </td>
+  <td>
+    {{trip.traveldate_from}}
+
+  </td>
+  <td>
+    {{trip.traveldate_to}}
+  </td>
+  <td>
+    {{trip.user.name}}
+  </td>
+  <td>
+    {{trip.id}}
+    <form  action="{% url 'belt:join' id=trip.id %}" method="post">
+      {% csrf_token %}
+      <input type="submit"  value="Join">
+    </form>
+  </td>
+{% endif %}
+{% endfor %}
+</tr>
+</table>
+  <a href="{% url 'belt:addtrip' %}">Add a trip</a>
+  <a href="{% url 'belt:logout' %}">LogOut</a>
+  </body>
+</html>
